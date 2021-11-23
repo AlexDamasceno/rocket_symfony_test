@@ -1,0 +1,11 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}New WebsiteHandler{% endblock %}
+
+{% block body %}
+    <h1>Create new WebsiteHandler</h1>
+
+    {{ include('website_handler/_form.html.twig') }}
+
+    <a href="{{ path('websitehandler_index') }}">back to list</a>
+{% endblock %}

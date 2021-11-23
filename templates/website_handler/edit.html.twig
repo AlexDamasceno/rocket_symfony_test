@@ -1,0 +1,13 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Edit WebsiteHandler{% endblock %}
+
+{% block body %}
+    <h1>Edit WebsiteHandler</h1>
+
+    {{ include('website_handler/_form.html.twig', {'button_label': 'Update'}) }}
+
+    <a href="{{ path('websitehandler_index') }}">back to list</a>
+
+    {{ include('website_handler/_delete_form.html.twig') }}
+{% endblock %}
