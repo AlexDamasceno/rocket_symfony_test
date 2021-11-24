@@ -14,7 +14,6 @@ class WebsiteHandlerType extends AbstractType
         $builder
             ->add('label')
             ->add('url')
-            ->add('status')
         ;
     }
 

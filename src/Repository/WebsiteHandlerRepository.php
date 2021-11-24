@@ -20,6 +20,16 @@ class WebsiteHandlerRepository extends ServiceEntityRepository
     }
 
     // /**
+    //  * @return WebsiteHandler[]
+    //  */
+    // public function findAllWebsites(): array
+    // {
+    //     return $this->createQueryBuilder('w')
+    //         ->getQuery()
+    //         ->getResult();
+    // }
+
+    // /**
     //  * @return WebsiteHandler[] Returns an array of WebsiteHandler objects
     //  */
     /*

@@ -10,6 +10,7 @@ use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
+use Symfony\Component\HttpClient\HttpClient;
 
 /**
  * @Route("/websitehandler")
@@ -35,11 +36,18 @@ class WebsiteHandlerController extends AbstractController
     {
         $this->denyAccessUnlessGranted('IS_AUTHENTICATED_FULLY');
 
+        $client = HttpClient::create();
+
         $websiteHandler = new WebsiteHandler();
         $form = $this->createForm(WebsiteHandlerType::class, $websiteHandler);
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
+    
+            $response = $client->request('GET', $websiteHandler->getUrl());
+
+            $websiteHandler->setStatus($response->getStatusCode()); 
+
             $entityManager->persist($websiteHandler);
             $entityManager->flush();
 
@@ -93,7 +101,7 @@ class WebsiteHandlerController extends AbstractController
     {
         $this->denyAccessUnlessGranted('IS_AUTHENTICATED_FULLY');
 
-        if ($this->isCsrfTokenValid('delete'.$websiteHandler->getId(), $request->request->get('_token'))) {
+        if ($this->isCsrfTokenValid('delete' . $websiteHandler->getId(), $request->request->get('_token'))) {
             $entityManager->remove($websiteHandler);
             $entityManager->flush();
         }

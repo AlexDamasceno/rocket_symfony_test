@@ -9,10 +9,11 @@
         </head>
         <body>
                 <nav class="navbar navbar-light bg-light">
-                        <a class="navbar-brand">Navbar</a>
+                        <a class="navbar-brand" href="{{ path('accueil') }}">Navbar</a>
                         {% if app.user %}
-                                {% if is_granted('ROLE_ADMIN') %}
-                                {% endif %}
+                                <div>
+                                        <a class="h3 ml-5" href="{{ path('websitehandler_index') }}">Website</a>
+                                </div>
                                 <div>
                                         Bonjour {{ app.user.username }} <a class="btn btn-sm btn-danger" href="{{ path('app_logout') }}">Déconnexion</a>
                                 </div>
