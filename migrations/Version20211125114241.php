@@ -10,7 +10,7 @@ use Doctrine\Migrations\AbstractMigration;
 /**
  * Auto-generated Migration: Please modify to your needs!
  */
-final class Version20211124161021 extends AbstractMigration
+final class Version20211125114241 extends AbstractMigration
 {
     public function getDescription(): string
     {
@@ -24,6 +24,8 @@ final class Version20211124161021 extends AbstractMigration
         , password VARCHAR(255) NOT NULL)');
         $this->addSql('CREATE UNIQUE INDEX UNIQ_8D93D649E7927C74 ON "user" (email)');
         $this->addSql('CREATE TABLE website_handler (id INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, label VARCHAR(255) NOT NULL, url VARCHAR(255) NOT NULL, status INTEGER NOT NULL)');
+        $this->addSql('CREATE TABLE website_status (id INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, website_id INTEGER DEFAULT NULL, status INTEGER NOT NULL, created_at DATETIME NOT NULL)');
+        $this->addSql('CREATE INDEX IDX_E985813718F45C82 ON website_status (website_id)');
     }
 
     public function down(Schema $schema): void
@@ -31,5 +33,6 @@ final class Version20211124161021 extends AbstractMigration
         // this down() migration is auto-generated, please modify it to your needs
         $this->addSql('DROP TABLE "user"');
         $this->addSql('DROP TABLE website_handler');
+        $this->addSql('DROP TABLE website_status');
     }
 }

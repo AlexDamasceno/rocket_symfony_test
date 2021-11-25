@@ -19,15 +19,15 @@ class WebsiteHandlerRepository extends ServiceEntityRepository
         parent::__construct($registry, WebsiteHandler::class);
     }
 
-    // /**
-    //  * @return WebsiteHandler[]
-    //  */
-    // public function findAllWebsites(): array
-    // {
-    //     return $this->createQueryBuilder('w')
-    //         ->getQuery()
-    //         ->getResult();
-    // }
+    public function update() 
+    {
+        $conn = $this->getEntityManager()->getConnection();
+
+        $sql = '
+            SELECT * FROM website_handler w
+            WHERE w.id = :id
+            ';
+    }
 
     // /**
     //  * @return WebsiteHandler[] Returns an array of WebsiteHandler objects

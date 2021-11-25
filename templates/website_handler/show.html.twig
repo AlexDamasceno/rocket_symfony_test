@@ -26,6 +26,13 @@
         </tbody>
     </table>
 
+    <div id="div_chart"></div>
+    
+    <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
+    <script type="text/javascript">
+        {{ gc_draw(area, 'div_chart') }}
+    </script>
+
     <a href="{{ path('websitehandler_index') }}">back to list</a>
 
     <a href="{{ path('websitehandler_edit', {'id': website_handler.id}) }}">edit</a>

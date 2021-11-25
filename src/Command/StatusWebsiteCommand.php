@@ -9,6 +9,7 @@ use Symfony\Component\Console\Input\InputOption;
 use Symfony\Component\Console\Output\OutputInterface;
 use Symfony\Component\Console\Style\SymfonyStyle;
 use Symfony\Component\Console\Helper\Table;
+use Symfony\Component\HttpClient\CurlHttpClient;
 
 use App\Repository\WebsiteHandlerRepository;
 
@@ -16,6 +17,8 @@ class StatusWebsiteCommand extends Command
 {
     protected static $defaultName = 'app:status-website';
     protected static $defaultDescription = 'Update website status codes';
+
+    private $entityManager;
 
     public function __construct(WebsiteHandlerRepository $websiteHandlerRepository)
     {
@@ -36,21 +39,28 @@ class StatusWebsiteCommand extends Command
     {
         $io = new SymfonyStyle($input, $output);
 
+        //find all the website
         $websites = $this->websiteHandlerRepository->findAll();
-        
-        $io->success('You have a new command! Now make it your own! Pass --help to see your options.');
+
+       // uses the cURL PHP extension
+        $client = new CurlHttpClient();
 
         $table = new Table($output);
-
         foreach($websites as $website) {
+
             $table
                 ->setHeaders(['Url', 'Status'])
                 ->setRows([
-                    [$website->getUrl(), $website->getStatus()],
+                    [
+                        $website->getUrl(), 
+                        $website->getStatus()
+                    ],
                 ])
             ;
             $table->render();
         }
+
+        $io->success('Everything gone well ! Pass --help to see your options.');
 
         return Command::SUCCESS;
     }
